@@ -1,158 +1,142 @@
-Maven Pizza Sales Analysis Report
+# Maven Pizza Sales Analysis  
 
-Introduction
+## Introduction  
+The Maven Pizza Sales Analysis project provides a comprehensive examination of sales performance, order trends, and customer behavior. The objective is to analyze revenue, orders, and pizza-specific metrics to identify trends, improve decision-making, and optimize operations for a pizzeria.  
 
-The Maven Pizza Sales Analysis report provides a detailed examination of sales performance, order trends, and customer behavior insights derived from the dataset. The objective is to analyze revenue, orders, and pizza-specific metrics to identify trends, improve decision-making, and optimize operations.
+---
 
+## Pre-Analysis Documentation  
 
+### Goals, Metrics, and Level of Detail  
 
-Data Preparation Steps
+| **Business Goal**                  | **Metrics**                      | **Level of Detail**                                   |  
+|------------------------------------|-----------------------------------|------------------------------------------------------|  
+| **Increase Revenue**               | Total Revenue, MOM Revenue change | Date (Quarter, Month, Day), Pizza type, category, size |  
+| **Increase Orders**                | Total Orders, MOM Sales change   | Date (Quarter, Month, Day, Time), Pizza type, category, size |  
+| **Improve Productivity**           | Total Orders                     | Date (Quarter, Month, Day) - Peak Periods            |  
+| **Understand Customers' Behavior** | Average Order Value (AOV)        | Date (Quarter, Month)                                |  
+| **Best/Worst Selling Pizzas**      | Total Orders, Total Revenue      | Pizza type, category, size                           |  
 
-Uploading the TablesAll four tables (‘Orders,’ ‘Order_Details,’ ‘Pizzas,’ and ‘Pizza_Types’) were uploaded into Power BI.
+---
 
-Adjusting HeadersThe header for the ‘Pizza_Types’ table was not set correctly. The option ‘Set First Row as Header’ was used to correct it.
+## Data Preparation Steps  
 
-Column ExtractionFrom the ‘Orders’ table, the columns for month, quarter, and day were extracted to enable time-based analysis.
+1. **Uploading Tables**: Datasets (‘Orders,’ ‘Order_Details,’ ‘Pizzas,’ and ‘Pizza_Types’) uploaded to Power BI.  
+2. **Adjusting Headers**: Corrected headers for the ‘Pizza_Types’ table.  
+3. **Column Extraction**: Extracted Month, Quarter, and Day columns from the ‘Orders’ table for time-based analysis.  
 
-Key Identification
+### Key Identification  
 
-Orders Table: Primary Key (‘Order_ID’)
+- **Orders Table**: Primary Key (`Order_ID`)  
+- **Pizza_Types Table**: Primary Key (`Pizza_Type_ID`)  
+- **Order_Details Table**: Primary Key (`Order_Details_ID`), Foreign Keys (`Order_ID`, `Pizza_ID`)  
+- **Pizzas Table**: Primary Key (`Pizza_ID`), Foreign Key (`Pizza_Type_ID`)  
 
-Pizza_Types Table: Primary Key (‘Pizza_Type_ID’)
+---
 
-Order_Details Table: Primary Key (‘Order_Details_ID’), Foreign Keys (‘Order_ID,’ ‘Pizza_ID’)
+## Data Modeling  
 
-Pizzas Table: Primary Key (‘Pizza_ID’), Foreign Key (‘Pizza_Type_ID’)
+- Relationship 1: `Orders[Order_ID] ↔ Order_Details[Order_ID]` (One-to-Many)  
+- Relationship 2: `Pizzas[Pizza_Type_ID] ↔ Pizza_Types[Pizza_Type_ID]` (One-to-Many)  
+- Relationship 3: `Pizzas[Pizza_ID] ↔ Order_Details[Pizza_ID]` (One-to-Many)  
 
-Data Modeling
+---
 
-Relationship 1: Orders (Order_ID) ↔ Order_Details (Order_ID) [One-to-Many]
+## Measures and Calculations  
 
-Relationship 2: Pizzas (Pizza_Type_ID) ↔ Pizza_Types (Pizza_Type_ID) [One-to-Many]
+### Key Measures  
 
-Relationship 3: Pizzas (Pizza_ID) ↔ Order_Details (Pizza_ID) [One-to-Many]
+1. **Total Orders**:  
+   - `Total_Orders = COUNT(Orders[Order_ID])`  
+   - **Result**: 21,000 unique orders  
 
-Measures and Calculations
+2. **Total Revenue**:  
+   - Created a calculated column using the RELATED function:  
+     - `Total_Price = Quantity × Price`  
+   - `Total_Revenue = SUM(Order_Details[Total_Price])`  
+   - **Result**: $817.86K  
 
-Measures
+3. **Average Metrics**:  
+   - **Average Order per Month**: 1.8K  
+   - **Average Order per Quarter**: 5.3K  
+   - **Average Order per Day**: 59.6  
+   - **Average Order Value (AOV)**: $38.3  
+   - **Average Revenue per Day**: $2.3K  
+   - **Average Revenue per Month**: $68.2K  
+   - **Average Revenue per Quarter**: $204.5K  
 
-Total OrdersFormula: Total_Orders = COUNT(Orders[Order_ID])Result: 21,000 unique orders
+---
 
-Total Revenue
+## Visualizations  
 
-A calculated column was created using the RELATED function to fetch the ‘Price’ column from the ‘Pizzas’ table.
+### Sales Dashboard  
 
-Total Price = Quantity × Price
+#### Cards Created  
 
-Formula: Total_Revenue = SUM(Order_Details[Total_Price])Result: $817.86K
+1. Total Orders: 21,000  
+2. Total Revenue: $817.86K  
+3. Average Order Value (AOV): $38.3  
+4. Average Revenue per Day: $2.3K  
+5. Average Revenue per Month: $68.2K  
+6. Average Revenue per Quarter: $204.5K  
 
-Average Order Metrics
+#### Visuals Created  
 
-Average Order per Month: Total Orders / DISTINCTCOUNT(Month) = 1.8K
+1. **Total Orders by Time**:  
+   - **By Month**: July is the highest.  
+   - **By Quarter**: Q2 is the highest.  
+   - **By Day**: Friday is the highest.  
 
-Average Order per Quarter: Total Orders / DISTINCTCOUNT(Quarter) = 5.3K
+2. **Total Revenue by Time**:  
+   - **By Month**: July is the highest.  
+   - **By Quarter**: Q2 is the highest.  
+   - **By Day**: Friday is the highest.  
 
-Average Order per Day: Total Orders / DISTINCTCOUNT(Day) = 59.6
+---
 
-Average Order Value (AOV): Total Revenue / Total Orders = $38.3
+### Pizza Table Analysis  
 
-Revenue Metrics
+#### Cards Created  
 
-Average Revenue per Day: Total Revenue / DISTINCTCOUNT(Day) = $2.3K
+1. **Top Pizza by Revenue**: Thai Chicken  
+2. **Bottom Pizza by Revenue**: Brie Carre  
+3. **Top Pizza by Orders**: Classic Deluxe  
+4. **Bottom Pizza by Orders**: Brie Carre  
 
-Average Revenue per Month: Total Revenue / DISTINCTCOUNT(Month) = $68.2K
+#### Visuals Created  
 
-Average Revenue per Quarter: Total Revenue / DISTINCTCOUNT(Quarter) = $204.5K
+1. **Pizza Category Revenue Distribution (Bar Chart)**:  
+   - **Highest**: Classic  
+   - **Lowest**: Veggie  
 
-Visualizations
+2. **Pizza Category Order Distribution (Pie Chart)**:  
+   - **Highest**: Classic  
+   - **Lowest**: Chicken  
 
-Sales Dashboard
+3. **Top 7 Pizzas by Revenue (Bar Chart)**  
+4. **Top 7 Pizzas by Orders (Bar Chart)**  
 
-Cards Created
+---
 
-Total Orders: 21,000
+## Insights and Recommendations  
 
-Total Revenue: $817.86K
+1. **Top Performers**:  
+   - Thai Chicken is the most profitable pizza, while Classic Deluxe is the most ordered.  
+   - Focus marketing campaigns around these top-performing pizzas.  
 
-Average Order Value (AOV): $38.3
+2. **Low Performers**:  
+   - Brie Carre consistently underperforms in both revenue and orders.  
+   - Consider revisiting pricing, marketing, or recipe improvements.  
 
-Average Revenue per Day: $2.3K
+3. **Time-Based Trends**:  
+   - Q2 and July exhibit peak sales. Promotions during these periods can amplify revenue.  
+   - Fridays are the busiest days; staffing and inventory should be optimized accordingly.  
 
-Average Revenue per Month: $68.2K
+4. **Category Insights**:  
+   - Classic pizzas dominate both revenue and orders. Expanding this category with new options could further boost sales.  
 
-Average Revenue per Quarter: $204.5K
+---
 
-Visuals Created
+## Conclusion  
 
-Total Orders by Time
-
-By Month: July is the highest.
-
-By Quarter: Q2 is the highest.
-
-By Day: Friday is the highest.
-
-Total Revenue by Time
-
-By Month: July is the highest.
-
-By Quarter: Q2 is the highest.
-
-By Day: Friday is the highest.
-
-Pizzas Table Analysis
-
-Cards Created
-
-Top Pizza by Revenue: Thai Chicken
-
-Bottom Pizza by Revenue: Brie Carre
-
-Top Pizza by Orders: Classic Deluxe
-
-Bottom Pizza by Orders: Brie Carre
-
-Visuals Created
-
-Pizza Category Revenue Distribution (Bar Chart):
-
-Highest: Classic
-
-Lowest: Veggie
-
-Pizza Category Order Distribution (Pie Chart):
-
-Highest: Classic
-
-Lowest: Chicken
-
-Top 7 Pizzas by Revenue (Bar Chart)
-
-Top 7 Pizzas by Orders (Bar Chart)
-
-Insights and Recommendations
-
-Top Performers
-
-Thai Chicken is the most profitable pizza, while Classic Deluxe is the most ordered.
-
-Focus marketing campaigns around these top-performing pizzas.
-
-Low Performers
-
-Brie Carre consistently underperforms in both revenue and orders. Consider revisiting pricing, marketing, or recipe improvements.
-
-Time-Based Trends
-
-Q2 and July exhibit peak sales. Promotions during these periods can amplify revenue.
-
-Fridays are the busiest days; staffing and inventory should be optimized accordingly.
-
-Category Insights
-
-Classic pizzas dominate both revenue and orders. Expanding this category with new options could further boost sales.
-
-Conclusion
-
-The analysis provides actionable insights to enhance revenue, order volume, and customer satisfaction. By leveraging the identified trends, the pizza business can make informed decisions to optimize operations and drive growth.
-
+The Maven Pizza Sales Analysis provides actionable insights to enhance revenue, order volume, and customer satisfaction. By leveraging identified trends, the pizza business can optimize operations, improve product offerings, and maximize profitability.  
