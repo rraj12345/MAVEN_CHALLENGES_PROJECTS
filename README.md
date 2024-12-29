@@ -4,51 +4,7 @@ Introduction
 
 The Maven Pizza Sales Analysis report provides a detailed examination of sales performance, order trends, and customer behavior insights derived from the dataset. The objective is to analyze revenue, orders, and pizza-specific metrics to identify trends, improve decision-making, and optimize operations.
 
-Pre-Analysis Documentation
 
-Goals, Metrics, and Level of Detail
-
-Business Goal
-
-Metrics
-
-Level of Detail
-
-Increase Revenue
-
-Total Revenue, MOM Revenue change
-
-Date (Quarter, Month, Day), Pizza type, category, size
-
-Increase Orders
-
-Total Orders, MOM Sales change
-
-Date (Quarter, Month, Day, Time), Pizza type, category, size
-
-Improve Productivity
-
-Total Orders
-
-Date (Quarter, Month, Day) - Peak Periods
-
-Understand Customers' Purchase Behavior
-
-Average Order Value (AOV)
-
-Date (Quarter, Month)
-
-Best and Worst Selling Pizzas
-
-Total Orders, Total Revenue
-
-Pizza type, category, size
-
-Seating Capacity
-
-Table Turnover Rate, Table Size
-
-Date (Time), Table Count
 
 Data Preparation Steps
 
