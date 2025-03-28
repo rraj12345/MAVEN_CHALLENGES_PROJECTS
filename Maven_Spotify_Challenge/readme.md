@@ -1,3 +1,10 @@
+This project analyzed 12 years of Spotify listening data (2013-2020) using Excel for cleaning and Power BI for visualization to uncover user behavior patterns. Key findings showed The Beatles and The Killers as top artists, "The New Abnormal" as the leading album, and Android as the dominant platform (25K engagements). Temporal analysis revealed peak listening between 6PM-12AM, with Fridays and October being the busiest periods. I used bar charts to compare content popularity, cards for key metrics (7,907 albums, 4,112 artists), and line charts for time trends, while DAX measures enabled calculations like total streaming minutes (320K). These insights help optimize recommendations, server loads during peak hours (10PM saw 22K streams), and platform development strategies, demonstrating how data analytics transforms raw streaming logs into actionable business intelligence for music platforms.
+
+#Here is the more brief overview of this project
+
+
+
+
 # Spotify Listening Behavior Analysis: Interview Explanation
 
 ## Problem Statement
